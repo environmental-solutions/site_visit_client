@@ -11,8 +11,8 @@ RUN yarn install
 
 ADD . /app
 
-EXPOSE 4000
-ENV PORT=4000
+EXPOSE 4001
+ENV PORT=4001
 
 # CMD [ "node", "devserver.js" ]
 # CMD [ "npm", "start" ]
