@@ -17,8 +17,8 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-      </ApolloProvider>,
-      document.getElementById('root')
+        <div> Loading Apollo Client! </div>
+      </ApolloProvider>
     );
   }
 }
