@@ -25,7 +25,7 @@ class App extends Component {
       <ApolloProvider client={client}>
         <BrowserRouter>
           <div>
-            <h1>This is Apollo</h1>
+            <h1>Site Visit</h1>
             <Route exact path="/" component={ProjectView} />
           </div>
         </BrowserRouter>

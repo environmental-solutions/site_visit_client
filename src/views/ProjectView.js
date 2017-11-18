@@ -29,8 +29,13 @@ class ProjectView extends React.Component {
           </ul>
         </div>
       )
-    } else {
-      return <div>???...</div>
+  } else {
+    return (
+      <div>
+        <h2>Projects</h2>
+        Loading...
+      </div>
+      )
     }
   }
 }
