@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import CreateProject from '../components/createProject';
 
 const ProjectQuery = gql`
   query ProjectsQuery {
@@ -11,6 +12,7 @@ const ProjectQuery = gql`
   }`;
 
 class ProjectView extends React.Component {
+
   render() {
     let { data } = this.props;
     if (data.isLoading) {
@@ -27,6 +29,7 @@ class ProjectView extends React.Component {
               <li key={project.id}>{project.name}</li>
             ))}
           </ul>
+          <CreateProject />
         </div>
       )
   } else {
@@ -38,6 +41,7 @@ class ProjectView extends React.Component {
       )
     }
   }
+
 }
 
 ProjectView = graphql(ProjectQuery)(ProjectView)
