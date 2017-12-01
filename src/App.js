@@ -9,15 +9,14 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import ProjectView from './views/ProjectView'
 
 var serverUrl;
-if (process.env.SERVER_GRAPHQL_URI) {
-  serverUrl = `${process.env.SERVER_GRAPHQL_URI}`
+if (process.env.REACT_APP_SERVER_API) {
+  serverUrl = `${process.env.REACT_APP_SERVER_API}`
 } else {
   serverUrl = 'http://localhost:3000/graphql'
 }
+
 const client = new ApolloClient({
   link: new HttpLink({
-    // uri: 'http://localhost:3000/graphql',
-    // uri: (`${process.env.SERVER_GRAPHQL_URI}` || 'http://localhost:666/graphql') ,
     uri: serverUrl,
     opts: {
       credentials: 'same-origin',
