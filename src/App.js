@@ -15,7 +15,7 @@ if (process.env.REACT_APP_SERVER_API) {
   serverUrl = 'http://localhost:3000/graphql'
 }
 
-console.log (`creating appolo client with public url process.env ${JSON.stringify(process.env)}`);
+console.log (`creating apollo client with public url process.env ${JSON.stringify(process.env)}`);
 console.log (`REACT_APP_SERVER_API ${JSON.stringify(process.env.REACT_APP_SERVER_API)}`);
 console.log (`computed server url ${serverUrl}`);
 const client = new ApolloClient({
