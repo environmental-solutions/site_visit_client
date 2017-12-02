@@ -8,19 +8,26 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import ProjectView from './views/ProjectView'
 
-var serverUrl;
-if (process.env.REACT_APP_SERVER_API) {
-  serverUrl = `${process.env.REACT_APP_SERVER_API}`
+//NOTE: using build environment to determine where to direct
+//external api calls
+//NOTE: this requires devs to map a ddx local domain
+var api = ''
+if (window.location.hostname.includes('ddx')) {
+  api = 'http://dev.ddx:8000/graphql'
+} else if (window.location.hostname.includes('localhost')) {
+  // api ='http://forecastingapi.workers.cloud/'
+  api = 'http://localhost:3000/graphql'
 } else {
-  serverUrl = 'http://localhost:3000/graphql'
+  api ='http://site-visit-api.workers.cloud/graphql'
 }
 
+console.log(`callling sever: ${api} `)
 console.log (`creating apollo client with public url process.env ${JSON.stringify(process.env)}`);
 console.log (`REACT_APP_SERVER_API ${JSON.stringify(process.env.REACT_APP_SERVER_API)}`);
-console.log (`computed server url ${serverUrl}`);
+
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: serverUrl,
+    uri: api,
     opts: {
       credentials: 'same-origin',
       mode: 'no-cors',
