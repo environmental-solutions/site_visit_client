@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Grid, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap"
 import CreateProject from '../components/createProject';
 
 const ProjectQuery = gql`
@@ -22,21 +23,35 @@ class ProjectView extends React.Component {
     console.log(JSON.stringify(data));
     if (data.projects) {
       return (
-        <div>
-          <h2>Projects</h2>
-          <ul>
-            {data.projects.map ((project, index) => (
-              <li key={project.id}>{project.name}</li>
-            ))}
-          </ul>
-          <CreateProject />
-        </div>
+        <Grid>
+          <Row>
+            <Col xs={12}>
+              <h2>Projects</h2>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={6}>
+              <h3>Add a New Project</h3>
+              <CreateProject />
+            </Col>
+            <Col xs={6}>
+              <h3>Project List</h3>
+              <ListGroup>
+                {data.projects.map ((project, index) => (
+                  <ListGroupItem key={project.id}>{project.name}</ListGroupItem>
+                ))}
+              </ListGroup>
+            </Col>
+          </Row>
+        </Grid>
       )
   } else {
     return (
       <div>
-        <h2>Projects</h2>
-        Loading...
+        <Row>
+          <h2>Projects</h2>
+          Loading...
+        </Row>
       </div>
       )
     }

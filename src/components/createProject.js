@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap"
 
 const ProjectCreateMutation =  gql`
   mutation ProjectCreationMutation ($projectInput: ProjectInputType!) {
@@ -40,8 +41,20 @@ class CreateProject  extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        Project Name: <input type="text" name="name" value={this.state.value} onChange={this.handleChange}  />
-        <input type='submit' value="Add Project" />
+        <FormGroup
+          controlId="formBasicText"
+        >
+          <ControlLabel>Project Name</ControlLabel>
+          <FormControl
+            type="text"
+            value={this.state.value}
+            placeholder="Enter text"
+            onChange={this.handleChange}
+          />
+        </FormGroup>
+        <Button bsStyle="primary" type="submit">
+          Create New Project
+        </Button>
       </form>
     );
   }
