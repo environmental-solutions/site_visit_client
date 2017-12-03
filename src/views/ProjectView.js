@@ -47,12 +47,20 @@ class ProjectView extends React.Component {
       )
   } else {
     return (
-      <div>
+      <Grid>
         <Row>
-          <h2>Projects</h2>
-          Loading...
+          <Col xs={12}>
+            <h2>Projects</h2>
+          </Col>
         </Row>
-      </div>
+        <Row>
+          <Col xs={6}>
+            <h3>Loading...</h3>
+          </Col>
+          <Col xs={6}>
+          </Col>
+        </Row>
+      </Grid>
       )
     }
   }
