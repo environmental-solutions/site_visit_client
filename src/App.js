@@ -15,9 +15,8 @@ var api = ''
 if (window.location.hostname.includes('ddx')) {
   api = 'http://dev.ddx:8000/graphql'
 } else if (window.location.hostname.includes('dev')) {
-  api = 'http://site_visit.dev:3000/graphql'
+  api = 'http://site_visit.dev:8000/graphql'
 } else if (window.location.hostname.includes('localhost')) {
-  // api ='http://forecastingapi.workers.cloud/'
   api = 'http://localhost:3000/graphql'
 } else {
   api ='http://site-visit-api.workers.cloud/graphql'
