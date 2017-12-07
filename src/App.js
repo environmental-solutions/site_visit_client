@@ -4,9 +4,12 @@ import ApolloClient from 'apollo-client-preset';
 import { ApolloProvider } from 'react-apollo';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Link, Route } from 'react-router-dom'
+import { Navbar, Nav, NavItem} from "react-bootstrap"
 
 import ProjectView from './views/ProjectView'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 
 //NOTE: using build environment to determine where to direct
 //external api calls
@@ -43,8 +46,28 @@ class App extends Component {
       <ApolloProvider client={client}>
         <BrowserRouter>
           <div>
+            <Navbar>
+              <Navbar.Header>
+                <Navbar.Brand>
+                  <a href="/">Site Visit</a>
+                </Navbar.Brand>
+                <Navbar.Toggle />
+              </Navbar.Header>
+              <Navbar.Collapse>
+                <Nav bsStyle="pills">
+                  <NavItem eventKey={1} href="/">Projects</NavItem>
+                </Nav>
+                <Nav pullRight>
+                  <NavItem eventKey={2} href="/login">Login</NavItem>
+                  <NavItem eventKey={3} href="/login">Logout</NavItem>
+                  <NavItem eventKey={4} href="/register">Register</NavItem>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
             <h1>Site Visit</h1>
             <Route exact path="/" component={ProjectView} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/register" component={RegisterPage} />
           </div>
         </BrowserRouter>
       </ApolloProvider>
