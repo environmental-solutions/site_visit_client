@@ -53,16 +53,14 @@ class App extends Component {
                 </Navbar.Brand>
                 <Navbar.Toggle />
               </Navbar.Header>
-              <Navbar.Collapse>
-                <Nav bsStyle="pills">
-                  <NavItem eventKey={1} href="/">Projects</NavItem>
-                </Nav>
-                <Nav pullRight>
-                  <NavItem eventKey={2} href="/login">Login</NavItem>
-                  <NavItem eventKey={3} href="/login">Logout</NavItem>
-                  <NavItem eventKey={4} href="/register">Register</NavItem>
-                </Nav>
-              </Navbar.Collapse>
+              <Nav bsStyle="pills">
+                <NavItem eventKey={1} href="/">Projects</NavItem>
+              </Nav>
+              <Nav pullRight>
+                <NavItem eventKey={2} href="/login">Login</NavItem>
+                <NavItem eventKey={3} href="/login">Logout</NavItem>
+                <NavItem eventKey={4} href="/register">Register</NavItem>
+              </Nav>
             </Navbar>
             <h1>Site Visit</h1>
             <Route exact path="/" component={ProjectView} />
