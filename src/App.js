@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ApolloClient from 'apollo-client-preset';
 import { ApolloProvider } from 'react-apollo';
 import { HttpLink } from 'apollo-link-http';
+import { ApolloLink, concat } from 'apollo-link';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { BrowserRouter, Link, Route } from 'react-router-dom'
 import { Navbar, Nav, NavItem} from "react-bootstrap"
@@ -29,14 +30,28 @@ console.log(`callling sever: ${api} `)
 console.log (`creating apollo client with public url process.env ${JSON.stringify(process.env)}`);
 console.log (`REACT_APP_SERVER_API ${JSON.stringify(process.env.REACT_APP_SERVER_API)}`);
 
-const client = new ApolloClient({
-  link: new HttpLink({
-    uri: api,
-    opts: {
-      credentials: 'same-origin',
-      mode: 'no-cors',
+const httpLink = new HttpLink({
+  uri: api,
+  opts: {
+    credentials: 'same-origin',
+    mode: 'no-cors',
+  }
+});
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+  operation.setContext({
+    headers: {
+      Authorization: `bearer ${localStorage.getItem('token')|| null}`,
     }
-  }),
+  });
+  return forward(operation);
+});
+
+const client = new ApolloClient({
+  link: concat(
+    authMiddleware,
+    httpLink
+  ),
   cache: new InMemoryCache(),
 });
 
