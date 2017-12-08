@@ -4,6 +4,7 @@ import ApolloClient from 'apollo-client-preset';
 import { ApolloProvider } from 'react-apollo';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloLink, concat } from 'apollo-link';
+import { onError } from 'apollo-link-error';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { BrowserRouter, Link, Route } from 'react-router-dom'
 import { Navbar, Nav, NavItem} from "react-bootstrap"
@@ -14,7 +15,6 @@ import RegisterPage from './pages/RegisterPage'
 
 //NOTE: using build environment to determine where to direct
 //external api calls
-//NOTE: this requires devs to map a ddx local domain
 var api = ''
 if (window.location.hostname.includes('ddx')) {
   api = 'http://dev.ddx:8000/graphql'
@@ -38,6 +38,13 @@ const httpLink = new HttpLink({
   }
 });
 
+const logoutLink = onError(({ networkError }) => {
+  if (networkError.statusCode === 401) {
+    console.log ('network error');
+    // logout();
+  };
+})
+
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
@@ -48,6 +55,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 });
 
 const client = new ApolloClient({
+  // link: logoutLink.concat(
   link: concat(
     authMiddleware,
     httpLink
