@@ -3,11 +3,11 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { FormGroup, ControlLabel, FormControl, Grid, Row, Col, Button} from "react-bootstrap"
 
-const LoginQuery = gql`
-  query ProjectsQuery {
-    projects {
-      name
-      id
+const LoginMutation =  gql`
+  mutation LoginMutation ($signInInput: signInInput!) {
+    signIn (input: $signInInput) {
+      email
+      token
     }
   }`;
 
@@ -20,7 +20,7 @@ class LoginPage extends React.Component {
     // this.props.dispatch(userActions.logout());
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
       submitted: false
     };
@@ -31,27 +31,30 @@ class LoginPage extends React.Component {
 
   handleChange(e) {
     const { name, value } = e.target;
+    console.log (`change; ${name}: ${value}`)
     this.setState({ [name]: value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log('logging in');
 
     this.setState({ submitted: true });
-    const { username, password } = this.state;
-    const { dispatch } = this.props;
-    // if (username && password) {
-    //     dispatch(userActions.login(username, password));
-    // }
+    const { email, password } = this.state;
+    this.props.mutate({
+      variables: { 'signInInput': {
+        'email': `${email}`,
+        'password': `${password}`
+      }}
+    }).then(({ data }) => {
+      console.log('login reply', data);
+      localStorage.setItem("token", data.signIn.token);
+    }).catch((error) => {
+      console.log('there was an error sending the query', error);
+    });
   }
 
  render() {
-    let { data } = this.props;
-    if (data.isLoading) {
-      return <div>Loading...</div>
-    }
-    console.log("got data");
-    console.log(JSON.stringify(data));
     return (
        <div className="Login">
         <Grid>
@@ -68,6 +71,7 @@ class LoginPage extends React.Component {
                   <FormControl
                     autoFocus
                     type="email"
+                    name="email"
                     value={this.state.email}
                     onChange={this.handleChange}
                   />
@@ -78,12 +82,14 @@ class LoginPage extends React.Component {
                     value={this.state.password}
                     onChange={this.handleChange}
                     type="password"
+                    name="password"
                   />
                 </FormGroup>
                 <Button
                   bsStyle="primary"
                   // disabled={!this.validateForm()}
                   type="submit"
+                  onSubmit={this.handleSubmit}
                 >
                   Login
                 </Button>
@@ -96,6 +102,5 @@ class LoginPage extends React.Component {
   }
 }
 
-LoginPage = graphql(LoginQuery)(LoginPage)
+LoginPage = graphql(LoginMutation)(LoginPage)
 export default LoginPage
-
