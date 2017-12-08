@@ -1,7 +1,8 @@
 import React from 'react'
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { FormGroup, ControlLabel, FormControl, Grid, Row, Col, Button} from "react-bootstrap"
+import { ButtonGroup, FormGroup, ControlLabel, FormControl, Grid, Row, Col, Button} from "react-bootstrap"
+import Logout from '../components/LogOut'
 
 const LoginMutation =  gql`
   mutation SignIn ($signInInput: signInInput!) {
@@ -54,7 +55,7 @@ class LoginPage extends React.Component {
     });
   }
 
- render() {
+  render() {
     return (
        <div className="Login">
         <Grid>
@@ -85,15 +86,19 @@ class LoginPage extends React.Component {
                     name="password"
                   />
                 </FormGroup>
-                <Button
-                  bsStyle="primary"
-                  // disabled={!this.validateForm()}
-                  type="submit"
-                  onSubmit={this.handleSubmit}
-                >
-                  Login
-                </Button>
+                <ButtonGroup vertical>
+                  <Button
+                    bsStyle="primary"
+                    // disabled={!this.validateForm()}
+                    type="submit"
+                    onSubmit={this.handleSubmit}
+                  >
+                    Login
+                  </Button>
+                  <Logout />
+                </ButtonGroup>
               </form>
+              <p />
             </Col>
           </Row>
         </Grid>
