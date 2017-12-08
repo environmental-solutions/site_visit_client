@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { FormGroup, ControlLabel, FormControl, Grid, Row, Col, Button} from "react-bootstrap"
 
 const LoginMutation =  gql`
-  mutation LoginMutation ($signInInput: signInInput!) {
+  mutation SignIn ($signInInput: signInInput!) {
     signIn (input: $signInInput) {
       email
       token
