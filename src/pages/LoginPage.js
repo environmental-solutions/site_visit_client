@@ -12,6 +12,13 @@ const LoginMutation =  gql`
     }
   }`;
 
+const IsLoggedInQuery = gql`
+  query localStateInfo {
+    data {
+      isLoggedIn
+    }
+  }`;
+
 class LoginPage extends React.Component {
 
   constructor(props) {

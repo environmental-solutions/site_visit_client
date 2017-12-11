@@ -4,6 +4,7 @@ import ApolloClient from 'apollo-client-preset';
 import { ApolloProvider } from 'react-apollo';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloLink, concat } from 'apollo-link';
+import { withClientState } from 'apollo-link-state';
 import { onError } from 'apollo-link-error';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { BrowserRouter, Link, Route } from 'react-router-dom'
@@ -12,6 +13,7 @@ import { Navbar, Nav, NavItem} from "react-bootstrap"
 import ProjectView from './views/ProjectView'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import localState from "./stores/localState";
 
 //NOTE: using build environment to determine where to direct
 //external api calls
@@ -58,7 +60,8 @@ const client = new ApolloClient({
   // link: logoutLink.concat(
   link: concat(
     authMiddleware,
-    httpLink
+    httpLink,
+    withClientState(localState),
   ),
   cache: new InMemoryCache(),
 });
