@@ -1,7 +1,15 @@
-import React from 'react'
-import { graphql } from 'react-apollo';
+import React from 'react';
+import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
-import { FormGroup, ControlLabel, FormControl, Grid, Row, Col, Button} from "react-bootstrap"
+import {
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  Grid,
+  Row,
+  Col,
+  Button,
+} from 'react-bootstrap';
 
 const RegisterQuery = gql`
   query ProjectsQuery {
@@ -9,10 +17,10 @@ const RegisterQuery = gql`
       name
       id
     }
-  }`;
+  }
+`;
 
 class RegisterPage extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -23,7 +31,7 @@ class RegisterPage extends React.Component {
       username: '',
       password: '',
       email: '',
-      submitted: false
+      submitted: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,30 +39,30 @@ class RegisterPage extends React.Component {
   }
 
   handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+    const {name, value} = e.target;
+    this.setState({[name]: value});
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    this.setState({ submitted: true });
-    const { username, password } = this.state;
-    const { dispatch } = this.props;
+    this.setState({submitted: true});
+    const {username, password} = this.state;
+    const {dispatch} = this.props;
     // if (username && password) {
     //     dispatch(userActions.login(username, password));
     // }
   }
 
   render() {
-    let { data } = this.props;
+    let {data} = this.props;
     if (data.isLoading) {
-      return <div>Loading...</div>
+      return <div>Loading...</div>;
     }
-    console.log("got data");
+    console.log('got data');
     console.log(JSON.stringify(data));
     return (
-       <div className="Login">
+      <div className="Login">
         <Grid>
           <Row>
             <Col xs={12}>
@@ -92,8 +100,7 @@ class RegisterPage extends React.Component {
                 <Button
                   bsStyle="primary"
                   // disabled={!this.validateForm()}
-                  type="submit"
-                >
+                  type="submit">
                   Register
                 </Button>
               </form>
@@ -101,10 +108,9 @@ class RegisterPage extends React.Component {
           </Row>
         </Grid>
       </div>
-    )
+    );
   }
-
 }
 
-RegisterPage = graphql(RegisterQuery)(RegisterPage)
-export default RegisterPage
+RegisterPage = graphql(RegisterQuery)(RegisterPage);
+export default RegisterPage;

@@ -1,18 +1,18 @@
-import React from 'react'
-import { graphql } from 'react-apollo';
+import React from 'react';
+import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap"
+import {Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 
-const ProjectCreateMutation =  gql`
-  mutation ProjectCreationMutation ($projectInput: ProjectInputType!) {
-    createProject (project: $projectInput) {
+const ProjectCreateMutation = gql`
+  mutation ProjectCreationMutation($projectInput: ProjectInputType!) {
+    createProject(project: $projectInput) {
       id
       name
     }
-  }`;
+  }
+`;
 
-class CreateProject  extends React.Component {
-
+class CreateProject extends React.Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
@@ -25,25 +25,27 @@ class CreateProject  extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log (`clicking`);
-    this.props.mutate({
-      variables: { 'projectInput': {
-        'name': `${this.state.value}`
-      }}
-    })
-    .then(({ data }) => {
-      console.log('got data', data);
-    }).catch((error) => {
-      console.log('there was an error sending the query', error);
-    });
+    console.log(`clicking`);
+    this.props
+      .mutate({
+        variables: {
+          projectInput: {
+            name: `${this.state.value}`,
+          },
+        },
+      })
+      .then(({data}) => {
+        console.log('got data', data);
+      })
+      .catch(error => {
+        console.log('there was an error sending the query', error);
+      });
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <FormGroup
-          controlId="formBasicText"
-        >
+        <FormGroup controlId="formBasicText">
           <ControlLabel>Project Name</ControlLabel>
           <FormControl
             type="text"
@@ -58,8 +60,7 @@ class CreateProject  extends React.Component {
       </form>
     );
   }
-
 }
 
 CreateProject = graphql(ProjectCreateMutation)(CreateProject);
-export default CreateProject
+export default CreateProject;

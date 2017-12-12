@@ -1,13 +1,15 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export default {
   Query: {
     localStateInfo: () => {
-      { isLoggedIn: false }
+      {
+        isLoggedIn: false;
+      }
     },
   },
   Mutation: {
-    toggleLoggedIn: (_, variables, { cache }) => {
+    toggleLoggedIn: (_, variables, {cache}) => {
       // const id = `TodoItem:${variables.id}`;
       // const fragment = gql`
       //   fragment completeTodo on TodoItem {

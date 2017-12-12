@@ -1,26 +1,36 @@
-import React from 'react'
-import { graphql } from 'react-apollo';
+import React from 'react';
+import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
-import { ButtonGroup, FormGroup, ControlLabel, FormControl, Grid, Row, Col, Button} from "react-bootstrap"
-import Logout from '../components/LogOut'
+import {
+  ButtonGroup,
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  Grid,
+  Row,
+  Col,
+  Button,
+} from 'react-bootstrap';
+import Logout from '../components/LogOut';
 
-const LoginMutation =  gql`
-  mutation SignIn ($signInInput: signInInput!) {
-    signIn (input: $signInInput) {
+const LoginMutation = gql`
+  mutation SignIn($signInInput: signInInput!) {
+    signIn(input: $signInInput) {
       email
       token
     }
-  }`;
+  }
+`;
 
 const IsLoggedInQuery = gql`
   query localStateInfo {
     data {
       isLoggedIn
     }
-  }`;
+  }
+`;
 
 class LoginPage extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -30,7 +40,7 @@ class LoginPage extends React.Component {
     this.state = {
       email: '',
       password: '',
-      submitted: false
+      submitted: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,33 +48,38 @@ class LoginPage extends React.Component {
   }
 
   handleChange(e) {
-    const { name, value } = e.target;
-    console.log (`change; ${name}: ${value}`)
-    this.setState({ [name]: value });
+    const {name, value} = e.target;
+    console.log(`change; ${name}: ${value}`);
+    this.setState({[name]: value});
   }
 
   handleSubmit(e) {
     e.preventDefault();
     console.log('logging in');
 
-    this.setState({ submitted: true });
-    const { email, password } = this.state;
-    this.props.mutate({
-      variables: { 'signInInput': {
-        'email': `${email}`,
-        'password': `${password}`
-      }}
-    }).then(({ data }) => {
-      console.log('login reply', data);
-      localStorage.setItem("token", data.signIn.token);
-    }).catch((error) => {
-      console.log('there was an error sending the query', error);
-    });
+    this.setState({submitted: true});
+    const {email, password} = this.state;
+    this.props
+      .mutate({
+        variables: {
+          signInInput: {
+            email: `${email}`,
+            password: `${password}`,
+          },
+        },
+      })
+      .then(({data}) => {
+        console.log('login reply', data);
+        localStorage.setItem('token', data.signIn.token);
+      })
+      .catch(error => {
+        console.log('there was an error sending the query', error);
+      });
   }
 
   render() {
     return (
-       <div className="Login">
+      <div className="Login">
         <Grid>
           <Row>
             <Col xs={12}>
@@ -98,8 +113,7 @@ class LoginPage extends React.Component {
                     bsStyle="primary"
                     // disabled={!this.validateForm()}
                     type="submit"
-                    onSubmit={this.handleSubmit}
-                  >
+                    onSubmit={this.handleSubmit}>
                     Login
                   </Button>
                   <Logout />
@@ -110,9 +124,9 @@ class LoginPage extends React.Component {
           </Row>
         </Grid>
       </div>
-    )
+    );
   }
 }
 
-LoginPage = graphql(LoginMutation)(LoginPage)
-export default LoginPage
+LoginPage = graphql(LoginMutation)(LoginPage);
+export default LoginPage;
