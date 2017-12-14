@@ -24,7 +24,7 @@ const LoginMutation = gql`
 
 const IsLoggedInQuery = gql`
   query localStateInfo {
-    localStateInfo
+    localStateInfo @client
   }
 `;
 
