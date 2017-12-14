@@ -7,12 +7,12 @@ export default withClientState({
   Query: {
     otherLocalStateInfo: () => bar,
     localStateInfo: () => foo,
-    // localstateinfo: () => {
-    //   {
-    //     'isloggedin': 'foobar';
-    //     'testinfo': false;
-    //   }
-    // },
+    hashLocalStateInfo: () => {
+      var h = {};
+      h['foo'] = foo;
+      h['bar'] = bar;
+      return h;
+    },
   },
   Mutation: {
     toggleLoggedIn: (_, variables, {cache}) => {
