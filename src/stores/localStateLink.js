@@ -1,11 +1,16 @@
 import {withClientState} from 'apollo-link-state';
 
+var foo = 'foobar';
+var bar = 'the other';
+
 export default withClientState({
   Query: {
-    localStateInfo: () => "foobar",
-    // localStateInfo: () => {
-    //   data: {
-    //     isLoggedIn: 'foobar';
+    otherLocalStateInfo: () => bar,
+    localStateInfo: () => foo,
+    // localstateinfo: () => {
+    //   {
+    //     'isloggedin': 'foobar';
+    //     'testinfo': false;
     //   }
     // },
   },

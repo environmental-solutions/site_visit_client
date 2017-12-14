@@ -12,7 +12,7 @@ import {Navbar, Nav, NavItem} from 'react-bootstrap';
 import ProjectView from './views/ProjectView';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import localState from './stores/localState';
+import localStateLink from './stores/localStateLink';
 
 //NOTE: using build environment to determine where to direct
 //external api calls
@@ -61,8 +61,12 @@ const authMiddleware = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
+const dataLink = concat(localStateLink, httpLink)
+
 const client = new ApolloClient({
-  link: concat(authMiddleware, httpLink, localState),
+  // link: concat(authMiddleware, httpLink, localStateLink),
+  // link: concat(authMiddleware, localStateLink, httpLink),
+  link: concat(authMiddleware, dataLink),
   cache: new InMemoryCache(),
 });
 
