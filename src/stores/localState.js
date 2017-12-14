@@ -1,12 +1,13 @@
-import gql from 'graphql-tag';
+import {withClientState} from 'apollo-link-state';
 
-export default {
+export default withClientState({
   Query: {
-    localStateInfo: () => {
-      {
-        isLoggedIn: false;
-      }
-    },
+    localStateInfo: () => "foobar",
+    // localStateInfo: () => {
+    //   data: {
+    //     isLoggedIn: 'foobar';
+    //   }
+    // },
   },
   Mutation: {
     toggleLoggedIn: (_, variables, {cache}) => {
@@ -23,4 +24,4 @@ export default {
       return false;
     },
   },
-};
+});

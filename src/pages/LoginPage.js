@@ -24,9 +24,7 @@ const LoginMutation = gql`
 
 const IsLoggedInQuery = gql`
   query localStateInfo {
-    data {
-      isLoggedIn
-    }
+    localStateInfo
   }
 `;
 
@@ -78,6 +76,9 @@ class LoginPage extends React.Component {
   }
 
   render() {
+    let {data} = this.props;
+    console.log('login page - got data');
+    console.log(JSON.stringify(data));
     return (
       <div className="Login">
         <Grid>
@@ -128,5 +129,6 @@ class LoginPage extends React.Component {
   }
 }
 
-LoginPage = graphql(LoginMutation)(LoginPage);
+// LoginPage = graphql(IsLoggedInQuery)(LoginMutation)(LoginPage);
+LoginPage = graphql(IsLoggedInQuery, LoginMutation)(LoginPage);
 export default LoginPage;

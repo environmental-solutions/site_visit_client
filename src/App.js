@@ -4,7 +4,6 @@ import ApolloClient from 'apollo-client-preset';
 import {ApolloProvider} from 'react-apollo';
 import {HttpLink} from 'apollo-link-http';
 import {ApolloLink, concat} from 'apollo-link';
-import {withClientState} from 'apollo-link-state';
 import {onError} from 'apollo-link-error';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {BrowserRouter, Link, Route} from 'react-router-dom';
@@ -63,8 +62,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 });
 
 const client = new ApolloClient({
-  // link: logoutLink.concat(
-  link: concat(authMiddleware, httpLink, withClientState(localState)),
+  link: concat(authMiddleware, httpLink, localState),
   cache: new InMemoryCache(),
 });
 
