@@ -29,7 +29,7 @@ class LocalReadFoo extends React.Component {
         <Grid>
           <Row>
             <Col xs={12}>
-              <h2>Local State</h2>
+              <h2>localStateInfo:</h2>
             </Col>
           </Row>
           <Row>
