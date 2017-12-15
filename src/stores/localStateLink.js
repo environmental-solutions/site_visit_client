@@ -1,4 +1,5 @@
 import {withClientState} from 'apollo-link-state';
+import gql from 'graphql-tag';
 
 var foo = 'foobar';
 var bar = 'the other';
@@ -17,11 +18,17 @@ export default withClientState({
   Mutation: {
     setLocalStateInfo: (_, { text }, { cache }) => {
       console.log (`setting state! to ${text}`);
-      this.foo = text;
+      // this.foo = text;
+      const query = gql`
+        query localStateInfo {
+          localStateInfo @client
+        }
+      `;
+      const previous = cache.readQuery({ query });
       const data = {
-        localStateInfo: this.foo,
+        localStateInfo: foo,
       };
-      // cache.writeQuery({ query, data });
+      cache.writeQuery({ query, data });
       return data;
     },
     toggleLoggedIn: (_, variables, {cache}) => {
