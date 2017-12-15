@@ -1,7 +1,7 @@
 import React from 'react';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
-import {Grid, Row, Col, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Grid, Row, Col} from 'react-bootstrap';
 
 const localStateQuery = gql`
   query localStateQuery {

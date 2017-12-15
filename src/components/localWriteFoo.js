@@ -2,13 +2,9 @@ import React from 'react';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 import {
-  ButtonGroup,
   FormGroup,
   ControlLabel,
   FormControl,
-  Grid,
-  Row,
-  Col,
   Button,
 } from 'react-bootstrap';
 

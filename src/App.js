@@ -6,7 +6,7 @@ import {HttpLink} from 'apollo-link-http';
 import {ApolloLink, concat} from 'apollo-link';
 import {onError} from 'apollo-link-error';
 import {InMemoryCache} from 'apollo-cache-inmemory';
-import {BrowserRouter, Link, Route} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
 
 import ProjectView from './views/ProjectView';
