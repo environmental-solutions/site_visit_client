@@ -35,8 +35,9 @@ class ProjectView extends React.Component {
                   <ListGroupItem key={project.id}>{project.name}</ListGroupItem>
                 ))}
               </ListGroup>
-              <LocalReadFoo />
-              <LocalWriteFoo />
+              {/* Local State Experiment */}
+              {/* <LocalReadFoo /> */}
+              {/* <LocalWriteFoo /> */}
             </Col>
           </Row>
         </Grid>
