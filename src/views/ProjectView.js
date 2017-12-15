@@ -3,17 +3,9 @@ import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 import {Grid, Row, Col, ListGroup, ListGroupItem} from 'react-bootstrap';
 import CreateProject from '../components/createProject';
+import { ProjectQuery } from '../stores/ProjectQuery';
 import LocalReadFoo from '../components/localReadFoo';
 import LocalWriteFoo from '../components/localWriteFoo';
-
-const ProjectQuery = gql`
-  query ProjectsQuery {
-    projects {
-      name
-      id
-    }
-  }
-`;
 
 class ProjectView extends React.Component {
   render() {

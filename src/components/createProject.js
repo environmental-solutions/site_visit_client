@@ -1,6 +1,8 @@
 import React from 'react';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
+import { ProjectQuery } from  '../stores/ProjectQuery';
+
 import {Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 
 const ProjectCreateMutation = gql`
@@ -9,8 +11,7 @@ const ProjectCreateMutation = gql`
       id
       name
     }
-  }
-`;
+  }`;
 
 class CreateProject extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class CreateProject extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log(`clicking`);
+    event.preventDefault();
     this.props
       .mutate({
         variables: {
@@ -33,6 +34,7 @@ class CreateProject extends React.Component {
             name: `${this.state.value}`,
           },
         },
+        refetchQueries: [{ query: ProjectQuery }],
       })
       .then(({data}) => {
         console.log('got data', data);
@@ -40,6 +42,8 @@ class CreateProject extends React.Component {
       .catch(error => {
         console.log('there was an error sending the query', error);
       });
+      event.target.elements['projectCreateInput'].value = ''
+      this.state.value = ''
   }
 
   render() {
@@ -48,6 +52,7 @@ class CreateProject extends React.Component {
         <FormGroup controlId="formBasicText">
           <ControlLabel>Project Name</ControlLabel>
           <FormControl
+            name="projectCreateInput"
             type="text"
             value={this.state.value}
             placeholder="Enter text"
