@@ -17,31 +17,20 @@ export default withClientState({
   },
   Mutation: {
     setLocalStateInfo: (_, { text }, { cache }) => {
-      console.log (`setting state! to ${text}`);
-      // this.foo = text;
-      const query = gql`
-        query localStateInfo {
-          localStateInfo @client
-        }
-      `;
-      const previous = cache.readQuery({ query });
-      const data = {
-        localStateInfo: foo,
-      };
-      cache.writeQuery({ query, data });
-      return data;
-    },
-    toggleLoggedIn: (_, variables, {cache}) => {
-      // const id = `TodoItem:${variables.id}`;
-      // const fragment = gql`
-      //   fragment completeTodo on TodoItem {
-      //     completed
+      console.log (`setting state from:${foo} to: ${text}`);
+      foo = text;
+      // const query = gql`
+      //   query localStateInfo {
+      //     localStateInfo @client
       //   }
       // `;
-      // const data = cache.readFragment({ fragment, id });
-      // data.completed = !data.completed;
-      // cache.writeFragment({ fragment, id, data });
+      // const data = {
+      //   localStateInfo: foo,
+      // };
+      // // cache.writeQuery({ query, data });
       // return data;
+    },
+    toggleLoggedIn: (_, variables, {cache}) => {
       return false;
     },
   },

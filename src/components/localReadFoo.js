@@ -3,7 +3,7 @@ import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 import {Grid, Row, Col} from 'react-bootstrap';
 
-const localStateQuery = gql`
+export const localStateQuery = gql`
   query localStateQuery {
     localStateInfo @client
   }
@@ -24,7 +24,7 @@ class LocalReadFoo extends React.Component {
           </Row>
           <Row>
             <Col xs={6}>
-              <h4>Foo: {data.localStateInfo}</h4>
+              <h4>LocalStateInfo: {data.localStateInfo}</h4>
             </Col>
           </Row>
         </Grid>
@@ -34,7 +34,7 @@ class LocalReadFoo extends React.Component {
         <Grid>
           <Row>
             <Col xs={12}>
-              <h2>Foo</h2>
+              <h2>Local State</h2>
             </Col>
           </Row>
           <Row>
