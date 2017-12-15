@@ -15,6 +15,15 @@ export default withClientState({
     },
   },
   Mutation: {
+    setLocalStateInfo: (_, { text }, { cache }) => {
+      console.log (`setting state! to ${text}`);
+      this.foo = text;
+      const data = {
+        localStateInfo: this.foo,
+      };
+      // cache.writeQuery({ query, data });
+      return data;
+    },
     toggleLoggedIn: (_, variables, {cache}) => {
       // const id = `TodoItem:${variables.id}`;
       // const fragment = gql`
