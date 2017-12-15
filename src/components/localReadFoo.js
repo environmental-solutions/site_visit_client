@@ -2,12 +2,7 @@ import React from 'react';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 import {Grid, Row, Col} from 'react-bootstrap';
-
-export const localStateQuery = gql`
-  query localStateQuery {
-    localStateInfo @client
-  }
-`;
+import { LocalStateQuery } from '../stores/LocalStateQuery';
 
 class LocalReadFoo extends React.Component {
   render() {
@@ -49,5 +44,5 @@ class LocalReadFoo extends React.Component {
   }
 }
 
-LocalReadFoo = graphql(localStateQuery)(LocalReadFoo);
+LocalReadFoo = graphql(LocalStateQuery)(LocalReadFoo);
 export default LocalReadFoo;

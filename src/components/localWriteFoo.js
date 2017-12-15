@@ -7,7 +7,7 @@ import {
   FormControl,
   Button,
 } from 'react-bootstrap';
-import {localStateQuery} from '../components/localReadFoo';
+import { LocalStateQuery } from '../stores/LocalStateQuery';
 
 const mutation = gql`
   mutation setLocalState($text: String!) {
@@ -37,7 +37,7 @@ class LocalWriteFoo extends React.Component {
         variables: {
           text: `${this.state.value}`,
         },
-        refetchQueries: [{ query: localStateQuery }],
+        refetchQueries: [{ query: LocalStateQuery }],
       })
       .then(({data}) => {
         console.log('got data', data);
