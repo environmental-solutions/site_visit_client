@@ -18,7 +18,7 @@ import localStateLink from './stores/localStateLink';
 //external api calls
 var api = '';
 if (window.location.hostname.includes('ddx')) {
-  api = 'http://dev.ddx:8000/graphql';
+  api = 'http://site-visit.ddx:8000/graphql';
 } else if (window.location.hostname.includes('dev')) {
   api = 'http://site_visit.dev:8000/graphql';
 } else if (window.location.hostname.includes('localhost')) {
