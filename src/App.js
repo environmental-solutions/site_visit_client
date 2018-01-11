@@ -23,6 +23,8 @@ if (window.location.hostname.includes('ddx')) {
   api = 'http://site_visit.dev:8000/graphql';
 } else if (window.location.hostname.includes('localhost')) {
   api = 'http://localhost:3000/graphql';
+} else if (window.location.hostname.includes('agidevelopment')) {
+  api = 'http://site-visit-api.agidevelopment.com/graphql';
 } else {
   api = 'http://site-visit-api.workers.cloud/graphql';
 }
